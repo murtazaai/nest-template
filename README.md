@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) framework TypeScript totally customized starter/template repository.
 
 ## Project setup
 
@@ -75,10 +75,15 @@ Check out a few resources that may come in handy when working with NestJS:
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
-
+Nest framework creator
 - Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
+
+Repository by
+- Author - [Murtaza Ali Imtiaz](https://x.com/murtazaix)
+- Website - [https://murtazai.com](https://murtazai.com/)
+- Non-Profit - [https://murtazai.org](https://murtazai.org)
 
 ## License
 
