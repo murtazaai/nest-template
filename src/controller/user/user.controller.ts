@@ -8,6 +8,8 @@ import {
   Delete,
   ForbiddenException,
   UseFilters,
+  ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 import { UserService } from '../../service/user/user.service';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
@@ -34,9 +36,27 @@ export class UserController {
     }
   }
 
+  /**
+   * UUID
+   * @param uuid
+   * @Get(':uuid')
+   * async findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
+   *   return this.catsService.findOne(uuid);
+   * }
+   */
+  /**
+   * Binding pipes
+   * @param id
+   */
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  async findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return this.usersService.findOne(id);
   }
 
   @Patch(':id')

@@ -1,6 +1,10 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UserService } from '../../service/user/user.service';
 import { User } from '../../entity/user/user.entity';
+
+/**
+ * Use TypeORM instead
+ */
 // '@ts-expect-error'
 // @ts-ignore
 import { CreateUserInput } from '../../dto/user/create-user.input';
