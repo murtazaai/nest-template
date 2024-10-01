@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DatabaseProviders } from '../../database/database.providers';
-import { Connection } from '../../database/connection.provider';
+import { DatabaseProvider } from '../../provider/database/database.provider';
+import { Connection } from '../../provider/database/connection/connection.database.provider';
 
 @Module({
   providers: [Connection],
@@ -11,11 +11,11 @@ export class DatabaseModule {
     entities = [],
     options?: any,
   ): {
-    exports: DatabaseProviders;
+    exports: DatabaseProvider;
     module: DatabaseModule;
-    providers: DatabaseProviders;
+    providers: DatabaseProvider;
   } {
-    const providers = new DatabaseProviders(options, entities);
+    const providers = new DatabaseProvider(options, entities);
     return {
       module: DatabaseModule,
       providers: providers,

@@ -8,13 +8,13 @@ import {
   Delete,
   ForbiddenException,
 } from '@nestjs/common';
-import { UsersService } from '../../service/users/users.service';
+import { UserService } from '../../service/user/user.service';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
 import { UpdateUserDto } from '../../dto/user/update-user.dto';
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UserService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {

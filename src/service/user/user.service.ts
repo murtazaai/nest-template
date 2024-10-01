@@ -3,7 +3,7 @@ import { CreateUserDto } from '../../dto/user/create-user.dto';
 import { UpdateUserDto } from '../../dto/user/update-user.dto';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   private _createUserDto: CreateUserDto;
   private _updateUserDto: UpdateUserDto;
   create(createUserDto: CreateUserDto) {

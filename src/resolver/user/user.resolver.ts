@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { UsersService } from '../../service/users/users.service';
+import { UserService } from '../../service/user/user.service';
 import { User } from '../../entities/user/user.entity';
 // '@ts-expect-error'
 // @ts-ignore
@@ -10,7 +10,7 @@ import { UpdateUserInput } from '../../dto/user/update-user.input';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UserService) {}
 
   @Mutation(() => User)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {

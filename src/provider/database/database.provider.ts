@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 @Module({})
-export class DatabaseProviders {
+export class DatabaseProvider {
   get entities(): any[] {
     return this._entities;
   }
