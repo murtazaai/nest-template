@@ -89,6 +89,15 @@ export class UserController {
     return this.usersService.findOne(id);
   }
 
+  /**
+   * Custom decorator @User
+   * Only used with ORM
+   */
+  // @Get()
+  // async findOne(@User() user: UserEntity) {
+  //   console.log(user);
+  // }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
