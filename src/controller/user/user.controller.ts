@@ -6,15 +6,14 @@ import {
   Patch,
   Param,
   Delete,
-  HttpException,
-  HttpStatus,
+  ForbiddenException,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersService } from '../../service/users/users.service';
+import { CreateUserDto } from '../../dto/user/create-user.dto';
+import { UpdateUserDto } from '../../dto/user/update-user.dto';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
@@ -27,16 +26,7 @@ export class UsersController {
     try {
       this.usersService.findAll();
     } catch (error) {
-      throw new HttpException(
-        {
-          status: HttpStatus.FORBIDDEN,
-          error: 'This is a custom message',
-        },
-        HttpStatus.FORBIDDEN,
-        {
-          cause: error,
-        },
-      );
+      throw new ForbiddenException();
     }
   }
 

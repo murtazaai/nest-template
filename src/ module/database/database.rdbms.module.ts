@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DatabaseProviders } from './database.providers';
-import { Connection } from './connection.provider';
+import { DatabaseProviders } from '../../database/database.providers';
+import { Connection } from '../../database/connection.provider';
 
 @Module({
   providers: [Connection],
@@ -9,7 +9,7 @@ import { Connection } from './connection.provider';
 export class DatabaseModule {
   private static forRoot(
     entities = [],
-    options?,
+    options?: any,
   ): {
     exports: DatabaseProviders;
     module: DatabaseModule;
