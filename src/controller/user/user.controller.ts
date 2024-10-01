@@ -13,8 +13,10 @@ import {
   UsePipes,
   ValidationPipe,
   DefaultValuePipe,
-  ParseBoolPipe, UseGuards
-} from "@nestjs/common";
+  ParseBoolPipe,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { UserService } from '../../service/user/user.service';
 import {
   CreateUserDto,
@@ -25,11 +27,13 @@ import { HttpExceptionFilter } from '../../filter/http-exception.filter';
 import { ZodValidationPipe } from '../../pipe/validation/zod.validation.pipe';
 import { Query } from '@nestjs/graphql';
 import { RolesGuard } from '../../guard/role.guard';
-import { Roles } from "../../guard/decorator/roles.decorator.guard";
+import { Roles } from '../../guard/decorator/roles.decorator.guard';
+import { LoggingInterceptor } from '../../interceptor/logging.interceptor';
 
 @Controller('user')
 @UseGuards(RolesGuard)
 @UseFilters(new HttpExceptionFilter())
+@UseInterceptors(LoggingInterceptor)
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
