@@ -5,18 +5,23 @@ import {
   RequestMethod,
   ValidationPipe,
 } from '@nestjs/common';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { AppController } from '../controller/app.controller';
 import { AppService } from '../service/app.service';
 import { UserModule } from './user/user.module';
 import { LoggerMiddleware } from '../common/middleware/logger.middleware';
 import { HttpExceptionFilter } from '../filter/http-exception.filter';
+import { RolesGuard } from '../guard/role.guard';
 
 @Module({
   controllers: [AppController],
   imports: [UserModule],
   providers: [
     AppService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
     {
       provide: APP_FILTER,
       // @ts-ignore
