@@ -14,7 +14,7 @@ export class AuthService {
     username: string,
     pass: string,
   ): Promise<{ access_token: string }> {
-    const user: User = this.usersService.findOne(username);
+    const user: User = this.usersService.findOne();
     if (user?.password !== pass) {
       throw new UnauthorizedException();
     }

@@ -17,7 +17,6 @@ export class UserService {
   }
 
   findOne(): User {
-    // return `This action returns a #${email} user`;
     return this.users[0];
   }
 

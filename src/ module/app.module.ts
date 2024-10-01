@@ -29,8 +29,11 @@ import { LoggingInterceptor } from '../interceptor/logging.interceptor';
     },
     {
       provide: APP_FILTER,
-      // @ts-ignore
-      useClass: HttpExceptionFilter | ValidationPipe,
+      useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: ValidationPipe,
     },
   ],
 })

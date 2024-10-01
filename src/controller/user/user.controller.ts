@@ -45,23 +45,11 @@ export class UserController {
   }
 
   /**
-   * UUID
-   * @param uuid
-   * @Get(':uuid')
-   * async findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
-   *   return this.catsService.findOne(uuid);
-   * }
-   */
-  /**
    * Binding pipes
-   * @param email
    */
-  @Get(':id')
-  async findOne(
-    @Param('email')
-    email: string,
-  ) {
-    return this.usersService.findOne(email).id;
+  @Get()
+  async findOne() {
+    return this.usersService.findOne();
   }
 
   /**
@@ -75,7 +63,7 @@ export class UserController {
 
   @Patch(':id')
   update(@Param('email') email: string, @Body() user: User) {
-    return this.usersService.update(email, user);
+    return this.usersService.update(user);
   }
 
   @Delete(':id')
