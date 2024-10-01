@@ -62,7 +62,7 @@ export class UserController {
   // }
 
   @Patch(':id')
-  update(@Param('email') email: string, @Body() user: User) {
+  update(@Body() user: User) {
     return this.usersService.update(user);
   }
 
