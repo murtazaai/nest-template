@@ -5,20 +5,13 @@ import { User } from '../../entity/user/user.entity';
 /**
  * Use TypeORM instead
  */
-// '@ts-expect-error'
-// @ts-ignore
-import { CreateUserInput } from '../../dto/user/create-user.input';
-// '@ts-expect-error'
-// @ts-ignore
-import { UpdateUserInput } from '../../dto/user/update-user.input';
-
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UserService) {}
 
   @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.usersService.create(createUserInput);
+  createUser(@Args('user') user: User) {
+    return this.usersService.create(user);
   }
 
   @Query(() => [User], { name: 'users' })
@@ -32,8 +25,8 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(updateUserInput.id, updateUserInput);
+  updateUser(@Args('updateUserInput') user: User) {
+    return this.usersService.update(user.id, user);
   }
 
   @Mutation(() => User)
