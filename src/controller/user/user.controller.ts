@@ -7,12 +7,15 @@ import {
   Param,
   Delete,
   ForbiddenException,
+  UseFilters,
 } from '@nestjs/common';
 import { UserService } from '../../service/user/user.service';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
 import { UpdateUserDto } from '../../dto/user/update-user.dto';
+import { HttpExceptionFilter } from '../../filter/http-exception.filter';
 
-@Controller('users')
+@Controller('user')
+@UseFilters(new HttpExceptionFilter())
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
@@ -22,6 +25,7 @@ export class UserController {
   }
 
   @Get()
+  @UseFilters(new HttpExceptionFilter())
   async findAll() {
     try {
       this.usersService.findAll();
