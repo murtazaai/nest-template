@@ -8,12 +8,7 @@ import {
   Delete,
   ForbiddenException,
   UseFilters,
-  ParseIntPipe,
-  HttpStatus,
-  // UsePipes,
   ValidationPipe,
-  // DefaultValuePipe,
-  // ParseBoolPipe,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -59,22 +54,14 @@ export class UserController {
    */
   /**
    * Binding pipes
-   * @param id
+   * @param email
    */
   @Get(':id')
   async findOne(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-      new ParseIntPipe(), // Optional, remove one of the pipes
-      /**
-       * UserByIdPipe) userEntity: UserEntity
-       * Either of a type among all the types, Entity is used with ORM
-       */
-    )
-    id: number,
+    @Param('email')
+    email: string,
   ) {
-    return this.usersService.findOne(id);
+    return this.usersService.findOne(email).id;
   }
 
   /**
@@ -87,8 +74,8 @@ export class UserController {
   // }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() user: User) {
-    return this.usersService.update(+id, user);
+  update(@Param('email') email: string, @Body() user: User) {
+    return this.usersService.update(email, user);
   }
 
   @Delete(':id')

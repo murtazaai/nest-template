@@ -3,24 +3,27 @@ import { User } from '../../entity/user/user.entity';
 
 @Injectable()
 export class UserService {
-  private user: User;
+  private users = [
+    new User(1, 'john', 'changeme'),
+    new User(2, 'maria', 'guess'),
+  ];
 
   create(user: User) {
-    this.user = user;
-    return 'This action adds a new user';
+    this.users.push(user);
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(): User {
+    // return `This action returns a #${email} user`;
+    return this.users[0];
   }
 
-  update(id: number, _user: User) {
-    this.user = _user;
-    return `This action updates a #${id} user`;
+  update(_user: User) {
+    this.users.pop();
+    this.users.push(_user);
   }
 
   remove(id: number) {
