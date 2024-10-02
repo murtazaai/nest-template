@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from '../../const/constants';
-import { AuthService } from '../../service/auth/auth.service';
-import { AuthController } from '../../controller/auth/auth.controller';
+import { jwtConstants } from '../const/constants';
+import { AuthService } from '../service/auth.service';
+import { AuthController } from '../controller/auth.controller';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from '../../guard/auth/auth.guard';
-import { UserModule } from '../user/user.module';
+import { AuthGuard } from '../guard/auth.guard';
+import { UserModule } from './user.module';
 
 @Module({
   imports: [

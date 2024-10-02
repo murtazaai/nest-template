@@ -8,17 +8,21 @@ import {
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from '../controller/app.controller';
 import { AppService } from '../service/app.service';
-import { UserModule } from './user/user.module';
+import { UserModule } from './user.module';
 import { LoggerMiddleware } from '../common/middleware/logger.middleware';
-import { HttpExceptionFilter } from '../filter/http-exception.filter';
 import { RolesGuard } from '../guard/role.guard';
 import { LoggingInterceptor } from '../interceptor/logging.interceptor';
+import { UserController } from '../controller/user.controller';
+import { UserService } from '../service/user.service';
+import { HttpExceptionFilter } from '../filter/http-exceptions.filter';
+import { AllExceptionsFilter } from '../filter/all-exceptions.filter';
 
 @Module({
-  controllers: [AppController],
+  controllers: [AppController, UserController],
   imports: [UserModule],
   providers: [
     AppService,
+    UserService,
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
@@ -30,6 +34,10 @@ import { LoggingInterceptor } from '../interceptor/logging.interceptor';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
     },
     {
       provide: APP_FILTER,
@@ -55,9 +63,9 @@ export class AppModule implements NestModule {
    * consumer
    *   .apply(LoggerMiddleware)
    *   .exclude(
-   *     { path: 'cats', method: RequestMethod.GET },
-   *     { path: 'cats', method: RequestMethod.POST },
-   *     'cats/(.*)',
+   *     { path: 'user', method: RequestMethod.GET },
+   *     { path: 'user', method: RequestMethod.POST },
+   *     'user/(.*)',
    *   )
    *   .forRoutes(CatsController);
    *

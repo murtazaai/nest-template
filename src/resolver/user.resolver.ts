@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { UserService } from '../../service/user/user.service';
-import { User } from '../../entity/user/user.entity';
+import { UserService } from '../service/user.service';
+import { User } from '../entity/user.entity';
 
 /**
  * Use TypeORM instead
@@ -20,8 +20,8 @@ export class UsersResolver {
   }
 
   @Query(() => User, { name: 'user' })
-  findOne() {
-    return this.usersService.findOne();
+  findOne(id: number) {
+    return this.usersService.findOne(id);
   }
 
   @Mutation(() => User)

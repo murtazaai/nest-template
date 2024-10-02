@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../../entity/user/user.entity';
+import { User } from '../entity/user.entity';
 
 @Injectable()
 export class UserService {
@@ -12,12 +12,16 @@ export class UserService {
     this.users.push(user);
   }
 
-  findAll() {
+  findAll(): User[] {
     return this.users;
   }
 
-  findOne(): User {
-    return this.users[0];
+  /**
+   * Fix required
+   * @param id
+   */
+  findOne(id: number): User {
+    return this.users[id];
   }
 
   update(_user: User) {

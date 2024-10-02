@@ -29,6 +29,6 @@ export class ValidationPipe implements PipeTransform {
 export interface ArgumentMetadata {
   type: 'body' | 'query' | 'param' | 'custom';
   // @ts-ignore
-  metatype?: Type<unknown>;
+  metatype?: Type<unknown>; // Type<unknown>
   data?: string;
 }
