@@ -16,13 +16,32 @@ import { UserController } from '../controller/user.controller';
 import { UserService } from '../service/user.service';
 import { HttpExceptionFilter } from '../filter/http-exceptions.filter';
 import { AllExceptionsFilter } from '../filter/all-exceptions.filter';
+import { Connection } from '../database/connection.database';
+import {
+  ConfigService,
+  DevelopmentConfigService,
+  ProductionConfigService,
+} from '../service/config.service';
+// import configuration from '../config/configuration';
 
 @Module({
   controllers: [AppController, UserController],
-  imports: [UserModule],
+  imports: [
+    UserModule,
+    // ConfigModule.forRoot({
+    //   load: [configuration],
+    // }),
+  ],
   providers: [
     AppService,
     UserService,
+    {
+      provide: ConfigService,
+      useClass:
+        process.env.NODE_ENV === 'development'
+          ? DevelopmentConfigService
+          : ProductionConfigService,
+    },
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
@@ -43,6 +62,10 @@ import { AllExceptionsFilter } from '../filter/all-exceptions.filter';
       provide: APP_FILTER,
       useClass: ValidationPipe,
     },
+    {
+      provide: 'CONNECTION',
+      useValue: Connection,
+    },
   ],
 })
 export class AppModule implements NestModule {
@@ -51,23 +74,4 @@ export class AppModule implements NestModule {
       .apply(LoggerMiddleware)
       .forRoutes({ path: 'users', method: RequestMethod.ALL });
   }
-
-  /**
-   * consumer
-   * .apply(logger)
-   * .forRoutes(CatsController);
-   */
-
-  /**
-   * Exclude
-   * consumer
-   *   .apply(LoggerMiddleware)
-   *   .exclude(
-   *     { path: 'user', method: RequestMethod.GET },
-   *     { path: 'user', method: RequestMethod.POST },
-   *     'user/(.*)',
-   *   )
-   *   .forRoutes(CatsController);
-   *
-   */
 }

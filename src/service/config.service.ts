@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
-import { EnvConfig } from './interfaces';
+import { EnvConfig } from '../config/env.config';
 
 @Injectable()
 export class ConfigService {
@@ -20,3 +20,9 @@ export class ConfigService {
     return this.envConfig[key];
   }
 }
+
+@Injectable()
+export class DevelopmentConfigService {}
+
+@Injectable()
+export class ProductionConfigService {}
